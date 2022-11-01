@@ -1,7 +1,5 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
-// @name:en      mahjong-helper-majsoul
-// @name:ja      mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
 // @version      20221102
 // @description  majsoul for mahjong-helper
