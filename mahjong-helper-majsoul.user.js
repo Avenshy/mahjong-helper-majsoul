@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20221102
+// @version      20221103
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -3801,12 +3801,12 @@ let API_URL = 'https://localhost:12121/'
                                     url: API_URL,
                                     data: JSON.stringify({
                                         'record_click_action': "jumpToLastRoundXun",
-                                        'fast_record_to': H - 1
+                                        'fast_record_to': r - 1
                                     }),
                                     onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "jumpToLastRoundXun",
-                                            'fast_record_to': H - 1
+                                            'fast_record_to': r - 1
                                         }));
                                     }
                                 }));
@@ -3868,12 +3868,12 @@ let API_URL = 'https://localhost:12121/'
                                     url: API_URL,
                                     data: JSON.stringify({
                                         'record_click_action': "preXun",
-                                        'fast_record_to': H - 1
+                                        'fast_record_to': r - 1
                                     }),
                                     onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preXun",
-                                            'fast_record_to': H - 1
+                                            'fast_record_to': r - 1
                                         }));
                                     }
                                 }));
@@ -3970,12 +3970,12 @@ let API_URL = 'https://localhost:12121/'
                                         url: API_URL,
                                         data: JSON.stringify({
                                             'record_click_action': "jumpXun",
-                                            'fast_record_to': S - 1
+                                            'fast_record_to': m - 1
                                         }),
                                         onload: function(msg) {
                                             console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'record_click_action': "jumpXun",
-                                                'fast_record_to': S - 1
+                                                'fast_record_to': m - 1
                                             }));
                                         }
                                     })),
