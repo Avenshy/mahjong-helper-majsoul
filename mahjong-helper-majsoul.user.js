@@ -10338,7 +10338,7 @@ let API_URL = 'https://localhost:12121/'
                     url: API_URL,
                     data: JSON.stringify({
                         'current_record_uuid': a,
-                        'account_id': parseInt(m.toString())
+                        'account_id': parseInt(U.toString())
                     }),
                     onload: function(msg) {
                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
