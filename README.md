@@ -1,6 +1,6 @@
 # mahjong-helper-majsoul
 
-本油猴脚本用于将雀魂的牌局发到[日本麻将助手](https://github.com/EndlessCheng/mahjong-helper)，安装即用，**无需配置Header Editor**等繁琐操作。  
+本油猴脚本用于将雀魂的牌局发到[日本麻将助手](https://github.com/EndlessCheng/mahjong-helper)，安装即用。  
 
 由于制作比较赶，可能还未兼容其他脚本，请期待后续的更新。  
 
@@ -16,11 +16,21 @@ Greasyfork: [mahjong-helper-majsoul](https://greasyfork.org/zh-CN/scripts/454100
   
 > 警告：<br />雀魂游戏官方可能会检测并封号！<br />如产生任何后果与作者无关！<br />使用本脚本则表示同意此条款！  
   
-  
+## 支持作者
+[点我为作者发电](https://afdian.net/a/Avenshy)
+
+注意：脚本完全免费使用，作者不盈利！
+
+发电是自愿行为，作者**非常非常非常非常非常**感谢你！
   
 ## 使用说明  
 1. 在浏览器中安装油猴脚本管理器（如`Tampermonkey`、`ScriptCat`等）
 2. 安装此脚本
 3. 运行日本麻将助手（mahjong-helper）
 4. 进入雀魂，开始游戏！
+
+## 续命说明
+为了您的雀魂账号安全，请使用修改版的code.js代替官方的code.js，否则您的雀魂账号会在一周内被封号。
+
+续命步骤请看：[雀魂Mod_Plus#续命说明](https://github.com/Avenshy/majsoul_mod_plus#%E7%BB%AD%E5%91%BD%E8%AF%B4%E6%98%8E)
    
