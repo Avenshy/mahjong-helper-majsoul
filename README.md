@@ -24,10 +24,13 @@ Greasyfork: [mahjong-helper-majsoul](https://greasyfork.org/zh-CN/scripts/454100
 发电是自愿行为，作者**非常非常非常非常非常**感谢你！
   
 ## 使用说明  
-1. 在浏览器中安装油猴脚本管理器（如`Tampermonkey`、`ScriptCat`等）
-2. 安装此脚本
-3. 运行日本麻将助手（mahjong-helper）
-4. 进入雀魂，开始游戏！
+**注意：无需按照原助手的使用说明进行配置！**如果你已经配置过了，请将Header Editor中的规则删除。
+1. 使用Chrome浏览器，在地址栏输入`chrome://flags/#allow-insecure-localhost`并启用，重启浏览器。
+   -  如果没有该项，请查看 [https://github.com/EndlessCheng/mahjong-helper/issues/108](https://github.com/EndlessCheng/mahjong-helper/issues/108)
+2. 在浏览器中安装油猴脚本管理器（如`Tampermonkey`、`ScriptCat`等）
+3. 安装此脚本
+4. 运行日本麻将助手（mahjong-helper）
+5. 进入雀魂，开始游戏！
 
 ## 续命说明
 为了您的雀魂账号安全，请使用修改版的code.js代替官方的code.js，否则您的雀魂账号会在一周内被封号。
