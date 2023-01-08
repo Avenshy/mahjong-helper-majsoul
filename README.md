@@ -24,7 +24,11 @@ Greasyfork: [mahjong-helper-majsoul](https://greasyfork.org/zh-CN/scripts/454100
 发电是自愿行为，作者**非常非常非常非常非常**感谢你！
   
 ## 使用说明  
-**注意：无需按照原助手的使用说明进行配置！**如果你已经配置过了，请将Header Editor中的规则删除。
+**注意：无需按照原助手的使用说明进行配置！** 
+
+如果你已经配置过了，请将Header Editor中的规则删除。
+
+### 使用方法
 1. 使用Chrome浏览器，在地址栏输入`chrome://flags/#allow-insecure-localhost`并启用，重启浏览器。
    -  如果没有该项，请查看 [https://github.com/EndlessCheng/mahjong-helper/issues/108](https://github.com/EndlessCheng/mahjong-helper/issues/108)
 2. 在浏览器中安装油猴脚本管理器（如`Tampermonkey`、`ScriptCat`等）
