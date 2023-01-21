@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20230121
+// @version      20230121.1
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -9900,7 +9900,7 @@ let API_URL = 'https://localhost:12121/'
                             }),
                             this["title"] = this.me["getChildByName"]("title"),
                             this["input"] = this.me["getChildByName"]("input")["getChildByName"]("txtinput"),
-                            this["input"]["prompt"] = game["Tools"]["item_name"](3690),
+                            this["input"]["prompt"] = game["Tools"]["strOfLocalization"](3690),
                             this["btn_confirm"] = this.me["getChildByName"]("btn_confirm"),
                             this["btn_cancel"] = this.me["getChildByName"]("btn_cancel"),
                             this.me["visible"] = !1,
