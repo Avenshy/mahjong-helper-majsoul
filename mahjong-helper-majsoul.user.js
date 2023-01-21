@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20230121.3
+// @version      20230121.4
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -902,7 +902,7 @@ let API_URL = 'https://localhost:12121/'
                             W = !1;
                         if (this["timestoped"] = !1, this["handles_after_timerun"] = [], this["action_running"] = !1, uiscript["UI_GameStop"].Inst["close"](), this["hangupCount"] = 0, uiscript["UI_Hangup_Warn"].Inst["enable"] = !1, B && 5 === B["game_state"] && (this["timestoped"] = !0), GameMgr.Inst["EnterMJ"](), B && B["actions"] && B["actions"]["length"] > 0) {
                             var actions = [];
-                            for (var idx = 0; idx < a.actions.length; idx++) {
+                            for (var idx = 0; idx < B.actions.length; idx++) {
                                 var rawAction = B.actions[idx];
                                 var action = net.ProtobufManager.lookupType("lq." + rawAction.name).decode(rawAction.data);
                                 actions.push({
