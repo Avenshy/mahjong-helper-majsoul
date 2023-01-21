@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20230121.1
+// @version      20230121.2
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -10509,11 +10509,11 @@ let API_URL = 'https://localhost:12121/'
                                 method: 'post',
                                 url: API_URL,
                                 data: JSON.stringify({
-                                    'shared_record_base_info': i.head
+                                    'shared_record_base_info': v.head
                                 }),
                                 onload: function (msg) {
                                     console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                        'shared_record_base_info': i.head
+                                        'shared_record_base_info': v.head
                                     }));
                                 }
                             }));
