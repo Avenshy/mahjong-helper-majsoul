@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20230226
+// @version      20230227
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -3434,7 +3434,7 @@ let API_URL = 'https://localhost:12121/'
                                             }));
                                         }
                                     })) ||
-                                    this['_jumpStep'](Q, 0), void 0);
+                                    this['_jumpStep'](S, 0), void 0);
                         },
                         w["prototype"]["jumpXun"] = function (S) {
                             if (this["locking_time"] > Laya["timer"]["currTimer"])
