@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mahjong-helper-majsoul
 // @namespace    https://github.com/Avenshy
-// @version      20230504
+// @version      20230507
 // @description  majsoul for mahjong-helper
 // @author       Avenshy
 // @iconURL      https://www.maj-soul.com/homepage/character/1/yiji_0.png
@@ -9,6 +9,7 @@
 // @supportURL   https://github.com/Avenshy/mahjong-helper-majsoul/issues
 // @match        https://game.maj-soul.com/1/
 // @match        https://game.maj-soul.net/1/
+// @match        https://game.mahjongsoul.com/
 // @match        https://game.mahjongsoul.com/index.html
 // @match        https://mahjongsoul.game.yo-star.com/
 // @grant        GM_xmlhttpRequest
@@ -16,8 +17,7 @@
 // @license      GPL-3.0
 // ==/UserScript==
 
-let API_URL = 'https://localhost:12121/'
-
+let API_URL = 'https://localhost:12121/';
 ! function mahjong_helper_majsoul() {
     try {
         ! function(Z) {
@@ -27,11 +27,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionLockTile play data:' + JSON['stringify'](S));
                             var V = S.seat;
                             S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1);
@@ -105,9 +108,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionLockTile'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             Z['PAIMODEL_HEIGHT'] = '0.043225' * 0.94,
                 Z['PAIMODEL_WIDTH'] = '0.032775' * 0.94,
@@ -868,11 +868,18 @@ let API_URL = 'https://localhost:12121/'
                         },
                         G['prototype']['changeMainbody'] = function(Z) {
                             if (this.mode != o.play && this['gameing']) {
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({ 'change_seat_to': Z })); },
-                                    req.send(JSON.stringify({ 'change_seat_to': Z }))
-                                );
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'change_seat_to': Z
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
+                                            'change_seat_to': Z
+                                        }));
+                                    }
+                                }));
                                 this.seat = Z,
                                     uiscript['UI_DesktopInfo'].Inst['refreshSeat'](!0);
                                 for (var S = 0; 4 > S; S++)
@@ -908,17 +915,18 @@ let API_URL = 'https://localhost:12121/'
                                         data: action
                                     });
                                 }
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'sync_game_actions': actions
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'sync_game_actions': actions
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'sync_game_actions': actions
-                                    }))
-                                );
+                                    }
+                                }));
                                 this['actionList'] = [];
                                 var y = -1;
                                 null != S['passed_waiting_time'] && void 0 != S['passed_waiting_time'] && (y = 1000 * S['passed_waiting_time']);
@@ -2135,10 +2143,6 @@ let API_URL = 'https://localhost:12121/'
             Z['DesktopMgr'] = y;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -2146,11 +2150,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this;
                             app.Log.log('ActionLiuJu play data:' + JSON['stringify'](S)),
                                 Z['DesktopMgr'].Inst['gameing'] = !1,
@@ -2255,8 +2262,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionLiuJu'] = S;
         }
         (view || (view = {}));
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -2264,11 +2269,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionUnveilTile play data:' + JSON['stringify'](S)),
                                 Z['DesktopMgr'].Inst['setScores'](S['scores']);
                             var V = Z['DesktopMgr'].Inst['players'][Z['DesktopMgr'].Inst['seat2LocalPosition'](S.seat)];
@@ -2314,9 +2322,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionUnveilTile'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function() {
                     function S(Z) {
@@ -2914,12 +2919,18 @@ let API_URL = 'https://localhost:12121/'
                                     G['auto_play'] = !G['auto_play'];
                                 }, null, !1),
                                 this.me['getChildByName']('root')['getChildByName']('nextstep')['clickHandler'] = Laya['Handler']['create'](this, function() {
-                                    return G['locking_time'] > Laya['timer']['currTimer'] ? (G['auto_play'] && (G['auto_play'] = !1), void 0) : (G['nextStep'](),
-                                        (req = new XMLHttpRequest(),
-                                            req.open("POST", API_URL),
-                                            req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({ 'record_click_action': "nextStep" })); },
-                                            req.send(JSON.stringify({ 'record_click_action': "nextStep" }))
-                                        ), void 0);
+                                    return G['locking_time'] > Laya['timer']['currTimer'] ? (G['auto_play'] && (G['auto_play'] = !1), void 0) : (G['nextStep'](), (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'record_click_action': "nextStep"
+                                        }),
+                                        onload: function(msg) {
+                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
+                                                'record_click_action': "nextStep"
+                                            }));
+                                        }
+                                    })), void 0);
                                 }, null, !1),
                                 this.me['getChildByName']('root')['getChildByName']('prestep')['clickHandler'] = Laya['Handler']['create'](this, function() {
                                     G['preStep']();
@@ -2984,17 +2995,18 @@ let API_URL = 'https://localhost:12121/'
                                             this['_isRoundEnd'](R) && (this['pengding_xun'](o), this['rounds'].push(o), o = null);
                                     }
                                 }
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_actions': actions
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_actions': actions
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_actions': actions
-                                    }))
-                                );
+                                    }
+                                }));
                             } else
                                 for (var G = 0; G < S['records']['length']; G++) {
                                     y += S['records'][G]['length'];
@@ -3340,18 +3352,18 @@ let API_URL = 'https://localhost:12121/'
                             return 0;
                         },
                         e['prototype']['update'] = function() {
-                            !this['auto_play'] || this['locking_time'] > Laya['timer']['currTimer'] || this['round_index'] >= 0 && this['round_index'] < this['rounds']['length'] && this['action_index'] + 1 < this['rounds'][this['round_index']]['actions']['length'] && (this['nextStep'](!1, !0),
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
-                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                            'record_click_action': "update"
-                                        }));
-                                    },
-                                    req.send(JSON.stringify({
+                            !this['auto_play'] || this['locking_time'] > Laya['timer']['currTimer'] || this['round_index'] >= 0 && this['round_index'] < this['rounds']['length'] && this['action_index'] + 1 < this['rounds'][this['round_index']]['actions']['length'] && (this['nextStep'](!1, !0), (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify({
+                                    'record_click_action': "update"
+                                }),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                         'record_click_action': "update"
-                                    }))
-                                ));
+                                    }));
+                                }
+                            })));
                         },
                         e['prototype']['jumpToLastRoundXun'] = function() {
                             if (this['locking_time'] > Laya['timer']['currTimer'])
@@ -3360,19 +3372,20 @@ let API_URL = 'https://localhost:12121/'
                             var Z = this['rounds'][this['round_index']],
                                 S = Z['actions']['length'] - 3;
                             1 > S && (S = 1),
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "jumpToLastRoundXun",
+                                        'fast_record_to': S - 1
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "jumpToLastRoundXun",
                                             'fast_record_to': S - 1
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "jumpToLastRoundXun",
-                                        'fast_record_to': S - 1
-                                    }))
-                                );
+                                    }
+                                }));
                             this['_jumpStep'](this['round_index'], S);
                         },
                         e['prototype']['nextXun'] = function() {
@@ -3391,19 +3404,20 @@ let API_URL = 'https://localhost:12121/'
                                     var V = this['get_currentxun']();
                                     S = V == Z.xun['length'] ? Z['actions']['length'] - 1 : Z.xun[V];
                                 }
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "nextXun",
+                                        'fast_record_to': S - 1
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "nextXun",
                                             'fast_record_to': S - 1
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "nextXun",
-                                        'fast_record_to': S - 1
-                                    }))
-                                );
+                                    }
+                                }));
                                 this['_jumpStep'](this['round_index'], S);
                             }
                         },
@@ -3423,19 +3437,20 @@ let API_URL = 'https://localhost:12121/'
                                     var V = this['get_currentxun']() - 1;
                                     S = 0 == V ? 0 : Z.xun[V - 1];
                                 }
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preXun",
+                                        'fast_record_to': S - 1
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preXun",
                                             'fast_record_to': S - 1
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "preXun",
-                                        'fast_record_to': S - 1
-                                    }))
-                                );
+                                    }
+                                }));
                                 this['_jumpStep'](this['round_index'], S);
                             }
                         },
@@ -3444,67 +3459,69 @@ let API_URL = 'https://localhost:12121/'
                                 return this['auto_play'] && (this['auto_play'] = !1), void 0;
                             if (!(this['round_index'] >= this['rounds']['length'] || this['round_index'] < 0)) {
                                 var Z = this['rounds'][this['round_index']];
-                                return 0 == this['action_index'] || 'RecordNewRound' == Z['actions'][this['action_index']].name ? (this['jumpToLastRoundXun'](), void 0) : (
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "preStep",
-                                                'fast_record_to': this.action_index - 2
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                return 0 == this['action_index'] || 'RecordNewRound' == Z['actions'][this['action_index']].name ? (this['jumpToLastRoundXun'](), void 0) : ((GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preStep",
+                                        'fast_record_to': this.action_index - 2
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preStep",
                                             'fast_record_to': this.action_index - 2
-                                        }))
-                                    ), this['_jumpStep'](this['round_index'], this['action_index'] - 1), void 0);
+                                        }));
+                                    }
+                                })), this['_jumpStep'](this['round_index'], this['action_index'] - 1), void 0);
                             }
                         },
                         e['prototype']['nextRound'] = function() {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "nextRound"
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : ((GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "nextRound"
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "nextRound"
-                                        }))
-                                    ), this['_jumpStep']((this['round_index'] + 1) % this['rounds']['length'], 0), void 0);
+                                        }));
+                                    }
+                                })), this['_jumpStep']((this['round_index'] + 1) % this['rounds']['length'], 0), void 0);
                         },
                         e['prototype']['preRound'] = function() {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preRound"
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preRound"
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "preRound"
-                                    }))
-                                ), this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (this['_jumpStep']((this['round_index'] - 1 + this['rounds']['length']) % this['rounds']['length'], 0), void 0);
+                                    }
+                                })),
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (this['_jumpStep']((this['round_index'] - 1 + this['rounds']['length']) % this['rounds']['length'], 0), void 0);
                         },
                         e['prototype']['jumpRound'] = function(Z) {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (0 > Z || Z >= this['rounds']['length'] ||
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "jumpRound",
-                                                'record_click_action_index': Z
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (0 > Z || Z >= this['rounds']['length'] || (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "jumpRound",
+                                        'record_click_action_index': Z
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "jumpRound",
                                             'record_click_action_index': Z
-                                        }))
-                                    ) || this['_jumpStep'](Z, 0), void 0);
+                                        }));
+                                    }
+                                })) || this['_jumpStep'](Z, 0), void 0);
                         },
                         e['prototype']['jumpXun'] = function(Z) {
                             if (this['locking_time'] > Laya['timer']['currTimer'])
@@ -3513,35 +3530,36 @@ let API_URL = 'https://localhost:12121/'
                                 var S = this['rounds'][this['round_index']],
                                     V = 0;
                                 V = 0 == S.xun['length'] ? 0 : 0 == Z ? 0 : S.xun[Z - 1],
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
+                                    (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'record_click_action': "jumpXun",
+                                            'fast_record_to': V - 1
+                                        }),
+                                        onload: function(msg) {
                                             console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'record_click_action': "jumpXun",
                                                 'fast_record_to': V - 1
                                             }));
-                                        },
-                                        req.send(JSON.stringify({
-                                            'record_click_action': "jumpXun",
-                                            'fast_record_to': V - 1
-                                        }))
-                                    ),
+                                        }
+                                    })),
                                     this['_jumpStep'](this['round_index'], V);
                             }
                         },
                         e['prototype']['onWheelClick'] = function() {
-                            return this['page_chang']['locking'] || this['page_xun']['locking'] ? void 0 : this['page_chang']['enable'] || this['page_xun']['enable'] ? (this['page_chang']['enable'] && this['page_chang']['close'](), this['page_xun']['enable'] && this['page_xun']['close'](), void 0) : (
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
-                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                            'record_click_action': "nextStep"
-                                        }));
-                                    },
-                                    req.send(JSON.stringify({
+                            return this['page_chang']['locking'] || this['page_xun']['locking'] ? void 0 : this['page_chang']['enable'] || this['page_xun']['enable'] ? (this['page_chang']['enable'] && this['page_chang']['close'](), this['page_xun']['enable'] && this['page_xun']['close'](), void 0) : ((GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify({
+                                    'record_click_action': "nextStep"
+                                }),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                         'record_click_action': "nextStep"
-                                    }))
-                                ), this['nextStep'](), void 0);
+                                    }));
+                                }
+                            })), this['nextStep'](), void 0);
                         },
                         e['prototype']['onChangeMainBody'] = function() {
                             var Z = this['round_index'],
@@ -3584,9 +3602,6 @@ let API_URL = 'https://localhost:12121/'
             Z['UI_Replay'] = G;
         }
         (uiscript || (uiscript = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -3594,11 +3609,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this,
                                 o = Z['DesktopMgr'].Inst.mode == Z['EMJMode'].play || Z['DesktopMgr'].Inst['record_show_anim'];
                             S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1),
@@ -3723,10 +3741,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionHuleXueZhanMid'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -3734,11 +3748,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             for (var V = 0, o = S['gang_infos'], y = !1, G = [], e = 0; e < o['delta_scores']['length']; e++) {
                                 var x = {
                                     title_id: 0,
@@ -3775,9 +3792,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionGangResult'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -3785,11 +3799,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionRevealTile play data:' + JSON['stringify'](S));
                             var V = S.seat,
                                 o = mjcore['MJPai']['Create'](S.tile ? S.tile : '5z'),
@@ -3868,10 +3885,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionRevealTile'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -3879,11 +3892,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this;
                             app.Log.log('ActionChangeTile play data:' + JSON['stringify'](S));
                             for (var o = function(V) {
@@ -4018,10 +4034,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionChangeTile'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -4029,11 +4041,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this;
                             app.Log.log('ActionSelectGap play data:' + JSON['stringify'](S));
                             for (var o = 0; o < S['gap_types']['length']; o++) {
@@ -4118,10 +4133,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionSelectGap'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -4129,11 +4140,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionLiqi play data:' + JSON['stringify'](S)),
                                 Laya['timer'].once(300, this, function() {
                                     var V = S.seat,
@@ -4168,10 +4182,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionLiqi'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function() {
                     function Z(S) {
@@ -5120,11 +5130,14 @@ let API_URL = 'https://localhost:12121/'
                         },
                         e['prototype']['_onLoginPengdingPhone'] = function() {},
                         e['prototype']['_onLoginSuccess'] = function(S, V, o) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(V)); },
-                                req.send(JSON.stringify(V))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(V),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(V));
+                                }
+                            }));
                             var y = this;
                             if (void 0 === o && (o = !1), app.Log.log('登陆：' + JSON['stringify'](V)), GameMgr.Inst['account_id'] = V['account_id'], GameMgr.Inst['account_data'] = V['account'], Z['UI_ShiMingRenZheng']['renzhenged'] = V['is_id_card_authed'], GameMgr.Inst['account_numerical_resource'] = {}, V['account']['platform_diamond'])
                                 for (var G = V['account']['platform_diamond'], e = 0; e < G['length']; e++)
@@ -5259,9 +5272,6 @@ let API_URL = 'https://localhost:12121/'
             Z['UI_Entrance'] = G;
         }
         (uiscript || (uiscript = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -5269,11 +5279,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionBabei play data:' + JSON['stringify'](S)),
                                 S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1);
                             var V = S.seat,
@@ -5342,10 +5355,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionBabei'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -5353,11 +5362,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this,
                                 o = Z['DesktopMgr'].Inst.mode == Z['EMJMode'].play || Z['DesktopMgr'].Inst['record_show_anim'];
                             S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1),
@@ -5465,9 +5477,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionHule'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -5475,11 +5484,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this;
                             app.Log.log('ActionNewRound play data:' + JSON['stringify'](S)),
                                 Z['BgmListMgr'].type == Z['E_Bgm_Type'].mj ? Z['BgmListMgr']['PlayMJBgm'](Z['BgmListMgr']['playing_bgm']) : Z['BgmListMgr']['PlayMJBgm'](),
@@ -5848,10 +5860,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionNewRound'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -5859,11 +5867,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionChiPengGang play data:' + JSON['stringify'](S));
                             var V = S.seat,
                                 o = new mjcore['MJMing']();
@@ -6059,9 +6070,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionChiPengGang'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -6069,11 +6077,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionDealTile play data:' + JSON['stringify'](S));
                             var V = S.seat,
                                 o = S.tile;
@@ -6169,9 +6180,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionDealTile'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -6179,11 +6187,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionDiscardTile play data:' + JSON['stringify'](S)),
                                 S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1);
                             var V = S.seat,
@@ -6269,9 +6280,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionDiscardTile'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S;
             ! function(Z) {
@@ -6285,11 +6293,14 @@ let API_URL = 'https://localhost:12121/'
                             var Z = this;
                             this['_friend_list'] = [],
                                 app['NetAgent']['sendReq2Lobby']('Lobby', 'fetchFriendList', {}, function(S, V) {
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(V)); },
-                                        req.send(JSON.stringify(V))
-                                    );
+                                    (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify(V),
+                                        onload: function(msg) {
+                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(V));
+                                        }
+                                    }));
                                     if (S)
                                         app.Log.log('获取好友列表时发生错误:' + S);
                                     else if (V['error'])
@@ -6471,10 +6482,6 @@ let API_URL = 'https://localhost:12121/'
             Z['FriendMgr'] = V;
         }
         (game || (game = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -6482,11 +6489,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this,
                                 o = Z['DesktopMgr'].Inst.mode == Z['EMJMode'].play || Z['DesktopMgr'].Inst['record_show_anim'];
                             S['doras'] && Z['DesktopMgr'].Inst['WhenDoras'](S['doras'], !1),
@@ -6628,10 +6638,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionHuleXueZhanEnd'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -6639,11 +6645,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionNewCard play data:' + JSON['stringify'](S));
                             var V = uiscript['UI_FightBegin'].hide();
                             return Laya['timer'].once(V + 200, this, function() {
@@ -6679,10 +6688,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionNewCard'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -6690,11 +6695,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             app.Log.log('ActionAnGangAddGang play data:' + JSON['stringify'](S));
                             var V = S.seat,
                                 o = Z['DesktopMgr'].Inst['seat2LocalPosition'](V);
@@ -6923,9 +6931,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionAnGangAddGang'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S = function() {
                     function S(Z) {
@@ -7412,18 +7417,18 @@ let API_URL = 'https://localhost:12121/'
                                 }, null, !1),
                                 this.me['getChildByName']('root')['getChildByName']('nextstep')['clickHandler'] = Laya['Handler']['create'](this, function() {
                                     return Z['locking'],
-                                        Z['locking_time'] > Laya['timer']['currTimer'] ? (Z['auto_play'] && (Z['auto_play'] = !1), void 0) : (Z['nextStep'](),
-                                            (req = new XMLHttpRequest(),
-                                                req.open("POST", API_URL),
-                                                req.onload = function() {
-                                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                        'record_click_action': "nextStep"
-                                                    }));
-                                                },
-                                                req.send(JSON.stringify({
+                                        Z['locking_time'] > Laya['timer']['currTimer'] ? (Z['auto_play'] && (Z['auto_play'] = !1), void 0) : (Z['nextStep'](), (GM_xmlhttpRequest({
+                                            method: 'post',
+                                            url: API_URL,
+                                            data: JSON.stringify({
+                                                'record_click_action': "nextStep"
+                                            }),
+                                            onload: function(msg) {
+                                                console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                     'record_click_action': "nextStep"
-                                                }))
-                                            ), void 0);
+                                                }));
+                                            }
+                                        })), void 0);
                                 }, null, !1),
                                 this.me['getChildByName']('root')['getChildByName']('prestep')['clickHandler'] = Laya['Handler']['create'](this, function() {
                                     Z['locking'],
@@ -7796,18 +7801,18 @@ let API_URL = 'https://localhost:12121/'
                             }
                         },
                         y['prototype']['update'] = function() {
-                            !this['auto_play'] || this['locking_time'] > Laya['timer']['currTimer'] || this['round_index'] >= 0 && this['round_index'] < this['rounds']['length'] && this['action_index'] + 1 < this['rounds'][this['round_index']]['actions']['length'] && (this['nextStep'](),
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
-                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                            'record_click_action': "update"
-                                        }));
-                                    },
-                                    req.send(JSON.stringify({
+                            !this['auto_play'] || this['locking_time'] > Laya['timer']['currTimer'] || this['round_index'] >= 0 && this['round_index'] < this['rounds']['length'] && this['action_index'] + 1 < this['rounds'][this['round_index']]['actions']['length'] && (this['nextStep'](), (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify({
+                                    'record_click_action': "update"
+                                }),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                         'record_click_action': "update"
-                                    }))
-                                ));
+                                    }));
+                                }
+                            })));
                         },
                         y['prototype']['jumpToLastRoundXun'] = function() {
                             if (this['locking_time'] > Laya['timer']['currTimer'])
@@ -7816,19 +7821,20 @@ let API_URL = 'https://localhost:12121/'
                             var Z = this['rounds'][this['round_index']],
                                 S = Z['actions']['length'] - 3;
                             1 > S && (S = 1),
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "jumpToLastRoundXun",
+                                        'fast_record_to': S - 1
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "jumpToLastRoundXun",
                                             'fast_record_to': S - 1
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "jumpToLastRoundXun",
-                                        'fast_record_to': S - 1
-                                    }))
-                                ),
+                                    }
+                                })),
                                 this['_jumpStep'](this['round_index'], S);
                         },
                         y['prototype']['nextXun'] = function() {
@@ -7846,19 +7852,20 @@ let API_URL = 'https://localhost:12121/'
                                         var V = this['get_currentxun']();
                                         S = V == Z.xun['length'] ? Z['actions']['length'] - 1 : Z.xun[V];
                                     }
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
+                                    (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'record_click_action': "nextXun",
+                                            'fast_record_to': S - 1
+                                        }),
+                                        onload: function(msg) {
                                             console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'record_click_action': "nextXun",
                                                 'fast_record_to': S - 1
                                             }));
-                                        },
-                                        req.send(JSON.stringify({
-                                            'record_click_action': "nextXun",
-                                            'fast_record_to': S - 1
-                                        }))
-                                    );
+                                        }
+                                    }));
                                     this['_jumpStep'](this['round_index'], S);
                                 }
                             }
@@ -7879,19 +7886,20 @@ let API_URL = 'https://localhost:12121/'
                                     var V = this['get_currentxun']() - 1;
                                     S = 0 == V ? 0 : Z.xun[V - 1];
                                 }
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preXun",
+                                        'fast_record_to': S - 1
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preXun",
                                             'fast_record_to': S - 1
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'record_click_action': "preXun",
-                                        'fast_record_to': S - 1
-                                    }))
-                                );
+                                    }
+                                }));
                                 this['_jumpStep'](this['round_index'], S);
                             }
                         },
@@ -7900,70 +7908,68 @@ let API_URL = 'https://localhost:12121/'
                                 return this['auto_play'] && (this['auto_play'] = !1), void 0;
                             if (!(this['round_index'] >= this['rounds']['length'] || this['round_index'] < 0)) {
                                 var Z = this['rounds'][this['round_index']];
-                                return 0 == this['action_index'] || 'RecordNewRound' == Z['actions'][this['action_index']].name ? (this['jumpToLastRoundXun'](), void 0) : (
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "preStep",
-                                                'fast_record_to': this.action_index - 2
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                return 0 == this['action_index'] || 'RecordNewRound' == Z['actions'][this['action_index']].name ? (this['jumpToLastRoundXun'](), void 0) : ((GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preStep",
+                                        'fast_record_to': this.action_index - 2
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preStep",
                                             'fast_record_to': this.action_index - 2
-                                        }))
-                                    ), this['_jumpStep'](this['round_index'], this['action_index'] - 1), void 0);
+                                        }));
+                                    }
+                                })), this['_jumpStep'](this['round_index'], this['action_index'] - 1), void 0);
                             }
                         },
                         y['prototype']['nextRound'] = function() {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "nextRound"
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : ((GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "nextRound"
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "nextRound"
-                                        }))
-                                    ),
-                                    this['_jumpStep']((this['round_index'] + 1) % this['rounds']['length'], 0), void 0);
+                                        }));
+                                    }
+                                })), this['_jumpStep']((this['round_index'] + 1) % this['rounds']['length'], 0), void 0);
                         },
                         y['prototype']['preRound'] = function() {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "preRound"
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : ((GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "preRound"
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "preRound"
-                                        }))
-                                    ), this['_jumpStep']((this['round_index'] - 1 + this['rounds']['length']) % this['rounds']['length'], 0), void 0);
+                                        }));
+                                    }
+                                })), this['_jumpStep']((this['round_index'] - 1 + this['rounds']['length']) % this['rounds']['length'], 0), void 0);
                         },
                         y['prototype']['jumpRound'] = function(Z) {
                             return this['page_xun']['enable'] && this['page_xun']['close'](),
-                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (0 > Z || Z >= this['rounds']['length'] ||
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
-                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                'record_click_action': "jumpRound",
-                                                'record_click_action_index': Z
-                                            }));
-                                        },
-                                        req.send(JSON.stringify({
+                                this['locking_time'] > Laya['timer']['currTimer'] ? (this['auto_play'] && (this['auto_play'] = !1), void 0) : (0 > Z || Z >= this['rounds']['length'] || (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'record_click_action': "jumpRound",
+                                        'record_click_action_index': Z
+                                    }),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'record_click_action': "jumpRound",
                                             'record_click_action_index': Z
-                                        }))
-                                    ) ||
-                                    this['_jumpStep'](Z, 0), void 0);
+                                        }));
+                                    }
+                                })) || this['_jumpStep'](Z, 0), void 0);
                         },
                         y['prototype']['jumpXun'] = function(Z) {
                             if (this['locking_time'] > Laya['timer']['currTimer'])
@@ -7972,35 +7978,36 @@ let API_URL = 'https://localhost:12121/'
                                 var S = this['rounds'][this['round_index']],
                                     V = 0;
                                 V = 0 == S.xun['length'] ? 0 : 0 == Z ? 0 : S.xun[Z - 1],
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
+                                    (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'record_click_action': "jumpXun",
+                                            'fast_record_to': V - 1
+                                        }),
+                                        onload: function(msg) {
                                             console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'record_click_action': "jumpXun",
                                                 'fast_record_to': V - 1
                                             }));
-                                        },
-                                        req.send(JSON.stringify({
-                                            'record_click_action': "jumpXun",
-                                            'fast_record_to': V - 1
-                                        }))
-                                    ),
+                                        }
+                                    })),
                                     this['_jumpStep'](this['round_index'], V);
                             }
                         },
                         y['prototype']['onWheelClick'] = function() {
-                            return this['page_chang']['locking'] || this['page_xun']['locking'] ? void 0 : this['page_chang']['enable'] || this['page_xun']['enable'] ? (this['page_chang']['enable'] && this['page_chang']['close'](), this['page_xun']['enable'] && this['page_xun']['close'](), void 0) : (
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
-                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                            'record_click_action': "nextStep"
-                                        }));
-                                    },
-                                    req.send(JSON.stringify({
+                            return this['page_chang']['locking'] || this['page_xun']['locking'] ? void 0 : this['page_chang']['enable'] || this['page_xun']['enable'] ? (this['page_chang']['enable'] && this['page_chang']['close'](), this['page_xun']['enable'] && this['page_xun']['close'](), void 0) : ((GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify({
+                                    'record_click_action': "nextStep"
+                                }),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                         'record_click_action': "nextStep"
-                                    }))
-                                ), this['nextStep'](), void 0);
+                                    }));
+                                }
+                            })), this['nextStep'](), void 0);
                         },
                         y['prototype']['_jumpStep'] = function(Z, S) {
                             var V = this['rounds'][Z];
@@ -8043,10 +8050,6 @@ let API_URL = 'https://localhost:12121/'
             Z['UI_Ob_Replay'] = o;
         }
         (uiscript || (uiscript = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -8054,11 +8057,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             for (var V = 0, o = S['gang_infos'], y = [], G = 0; G < o['delta_scores']['length']; G++) {
                                 var e = {
                                     title_id: 0,
@@ -8107,10 +8113,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionGangResultEnd'] = S;
         }
         (view || (view = {}));
-
-
-
-
         ! function(Z) {
             var S = function(S) {
                     function V() {
@@ -8118,11 +8120,14 @@ let API_URL = 'https://localhost:12121/'
                     }
                     return __extends(V, S),
                         V.play = function(S) {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S)); },
-                                req.send(JSON.stringify(S))
-                            );
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify(S),
+                                onload: function(msg) {
+                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(S));
+                                }
+                            }));
                             var V = this;
                             app.Log.log('ActionNotile play data:' + JSON['stringify'](S));
                             for (var o = 0, y = 1; 4 > y; y++) {
@@ -8322,9 +8327,6 @@ let API_URL = 'https://localhost:12121/'
             Z['ActionNoTile'] = S;
         }
         (view || (view = {}));
-
-
-
         ! function(Z) {
             var S,
                 V = function() {
@@ -8435,11 +8437,14 @@ let API_URL = 'https://localhost:12121/'
                             app['NetAgent']['sendReq2Lobby']('Lobby', 'fetchGameLiveInfo', {
                                 game_uuid: S
                             }, function(o, y) {
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y)); },
-                                    req.send(JSON.stringify(y))
-                                );
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify(y),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y));
+                                    }
+                                }));
                                 o || y['error'] ? (Z['UIMgr'].Inst['showNetReqError']('fetchGameLiveInfo', o, y), V && V['runWith']({
                                     success: !1
                                 })) : (app.Log.log('fetchGameLiveInfo res:' + JSON['stringify'](y)), y['left_start_seconds'] ? Z['UI_WaitOb'].Inst.show(S, y['left_start_seconds'], V) : V && V['runWith']({
@@ -8644,17 +8649,18 @@ let API_URL = 'https://localhost:12121/'
                         y['prototype']['_doUnit'] = function(S, V, o) {
                             if (V) {
                                 if (1 == S['category'])
-                                    return (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() {
+                                    return (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'live_fast_action': S
+                                        }),
+                                        onload: function(msg) {
                                             console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'live_fast_action': S
                                             }));
-                                        },
-                                        req.send(JSON.stringify({
-                                            'live_fast_action': S
-                                        }))
-                                    ), this['_doFastRecord'](S.name, S.data, o), view['DesktopMgr'].Inst['timestoped'] || (this['time_stop_length'] = 0), 0;
+                                        }
+                                    })), this['_doFastRecord'](S.name, S.data, o), view['DesktopMgr'].Inst['timestoped'] || (this['time_stop_length'] = 0), 0;
                                 if ('GameNewRoundState' == S.name) {
                                     for (var y = 0; y < S.data['seat_states']['length']; y++)
                                         view['DesktopMgr']['player_link_state'][y] = S.data['seat_states'][y];
@@ -8666,17 +8672,18 @@ let API_URL = 'https://localhost:12121/'
                                 return -1;
                             }
                             if (1 == S['category']) {
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() {
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify({
+                                        'live_action': S
+                                    }),
+                                    onload: function(msg) {
                                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                             'live_action': S
                                         }));
-                                    },
-                                    req.send(JSON.stringify({
-                                        'live_action': S
-                                    }))
-                                );
+                                    }
+                                }));
                                 var G = this['_doRecord'](S.name, S.data, o);
                                 return view['DesktopMgr'].Inst['timestoped'] || (this['time_stop_length'] = 0),
                                     G;
@@ -8742,11 +8749,14 @@ let API_URL = 'https://localhost:12121/'
                             app['NetAgent']['sendReq2Lobby']('Lobby', 'fetchGameLiveInfo', {
                                 game_uuid: S
                             }, function(o, y) {
-                                (req = new XMLHttpRequest(),
-                                    req.open("POST", API_URL),
-                                    req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y)); },
-                                    req.send(JSON.stringify(y))
-                                );
+                                (GM_xmlhttpRequest({
+                                    method: 'post',
+                                    url: API_URL,
+                                    data: JSON.stringify(y),
+                                    onload: function(msg) {
+                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y));
+                                    }
+                                }));
                                 if (o || y['error'] || y['left_start_seconds'])
                                     GameMgr.Inst['postInfo2Server']('ob_failure', {
                                         condition: 'loading',
@@ -9056,10 +9066,6 @@ let API_URL = 'https://localhost:12121/'
             Z['UI_Live_Broadcast'] = o;
         }
         (uiscript || (uiscript = {}));
-
-
-
-
         ! function(Z) {
             var S,
                 V = function() {
@@ -9638,18 +9644,18 @@ let API_URL = 'https://localhost:12121/'
                         y['prototype']['_doUnit'] = function(S, V, o) {
                             if (app['Log_OB'].info('clear unit timeout dounit ' + S.seq), this['removeTimer'](), V) {
                                 if (1 == S['category'])
-                                    return (req = new XMLHttpRequest(),
-                                            req.open("POST", API_URL),
-                                            req.onload = function() {
-                                                console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
-                                                    'live_fast_action': S
-                                                }));
-                                            },
-                                            req.send(JSON.stringify({
+                                    return (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify({
+                                            'live_fast_action': S
+                                        }),
+                                        onload: function(msg) {
+                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                                 'live_fast_action': S
-                                            }))
-                                        ),
-                                        this['_doFastRecord'](S.name, S.data, o), view['DesktopMgr'].Inst['timestoped'] || (this['time_stop_length'] = 0), 0;
+                                            }));
+                                        }
+                                    })), this['_doFastRecord'](S.name, S.data, o), view['DesktopMgr'].Inst['timestoped'] || (this['time_stop_length'] = 0), 0;
                                 if ('GameNewRoundState' == S.name) {
                                     for (var y = 0; y < S.data['seat_states']['length']; y++)
                                         view['DesktopMgr']['player_link_state'][y] = S.data['seat_states'][y];
@@ -9728,10 +9734,6 @@ let API_URL = 'https://localhost:12121/'
             Z['UI_Live_Broadcast1'] = o;
         }
         (uiscript || (uiscript = {}));
-
-
-
-
         if (typeof MMP == 'undefined') {
             ! function(Z) {
                 var S = function() {
@@ -9753,11 +9755,14 @@ let API_URL = 'https://localhost:12121/'
                                 this['_report_reconnect_count'] = 0,
                                 this['_connect_start_time'] = 0,
                                 app['NetAgent']['AddListener2MJ']('NotifyPlayerLoadGameReady', Laya['Handler']['create'](this, function(Z) {
-                                    (req = new XMLHttpRequest(),
-                                        req.open("POST", API_URL),
-                                        req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(Z)); },
-                                        req.send(JSON.stringify(Z))
-                                    );
+                                    (GM_xmlhttpRequest({
+                                        method: 'post',
+                                        url: API_URL,
+                                        data: JSON.stringify(Z),
+                                        onload: function(msg) {
+                                            console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(Z));
+                                        }
+                                    }));
                                     app.Log.log('NotifyPlayerLoadGameReady: ' + JSON['stringify'](Z)),
                                         S['loaded_player_count'] = Z['ready_id_list']['length'],
                                         S['load_over'] && uiscript['UI_Loading'].Inst['enable'] && uiscript['UI_Loading'].Inst['showLoadCount'](S['loaded_player_count'], S['real_player_count']);
@@ -9901,11 +9906,14 @@ let API_URL = 'https://localhost:12121/'
                                         if (V || o['error'])
                                             uiscript['UIMgr'].Inst['showNetReqError']('authGame', V, o), Z['Scene_MJ'].Inst['GameEnd'](), view['BgmListMgr']['PlayLobbyBgm']();
                                         else {
-                                            (req = new XMLHttpRequest(),
-                                                req.open("POST", API_URL),
-                                                req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(o)); },
-                                                req.send(JSON.stringify(o))
-                                            );
+                                            (GM_xmlhttpRequest({
+                                                method: 'post',
+                                                url: API_URL,
+                                                data: JSON.stringify(o),
+                                                onload: function(msg) {
+                                                    console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(o));
+                                                }
+                                            }));
                                             app.Log.log('麻将桌验证通过：' + JSON['stringify'](o)),
                                                 uiscript['UI_Loading'].Inst['setProgressVal'](0.1);
                                             var y = [],
@@ -10135,10 +10143,6 @@ let API_URL = 'https://localhost:12121/'
                 Z['MJNetMgr'] = S;
             }
             (game || (game = {}));
-
-
-
-
             ! function(Z) {
                 var S = function() {
                         function S(Z) {
@@ -10326,11 +10330,14 @@ let API_URL = 'https://localhost:12121/'
                                             if (S['duringload'] = !1, G.Inst['onLoadStateChange'](S.type, !1), V || y['error'])
                                                 Z['UIMgr'].Inst['showNetReqError']('fetchGameRecordList', V, y);
                                             else if (app.Log.log(JSON['stringify'](y)), y['record_list'] && y['record_list']['length'] > 0) {
-                                                (req = new XMLHttpRequest(),
-                                                    req.open("POST", API_URL),
-                                                    req.onload = function() { console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y)); },
-                                                    req.send(JSON.stringify(y))
-                                                );
+                                                (GM_xmlhttpRequest({
+                                                    method: 'post',
+                                                    url: API_URL,
+                                                    data: JSON.stringify(y),
+                                                    onload: function(msg) {
+                                                        console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify(y));
+                                                    }
+                                                }));
                                                 for (var e = y['record_list'], x = 0, R = 0; R < e['length']; R++) {
                                                     var s = e[R].uuid;
                                                     if (S.type == o.RANK && e[R]['config'] && e[R]['config'].meta) {
@@ -10712,24 +10719,22 @@ let API_URL = 'https://localhost:12121/'
                 Z['UI_PaiPu'] = G;
             }
             (uiscript || (uiscript = {}));
-
-
-
-
             GameMgr.Inst.checkPaiPu = function(S, V, o) {
-                (req = new XMLHttpRequest(),
-                    req.open("POST", API_URL),
-                    req.onload = function() {
+                (GM_xmlhttpRequest({
+                    method: 'post',
+                    url: API_URL,
+                    data: JSON.stringify({
+                        'current_record_uuid': S,
+                        'account_id': parseInt(V.toString())
+                    }),
+                    onload: function(msg) {
                         console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                             'current_record_uuid': S,
                             'account_id': parseInt(V.toString())
                         }));
-                    },
-                    req.send(JSON.stringify({
-                        'current_record_uuid': S,
-                        'account_id': parseInt(V.toString())
-                    }))
-                );
+                    }
+                }));
+
                 var y = GameMgr.Inst;
                 var Z = GameMgr;
                 return S = S.trim(),
@@ -10750,17 +10755,18 @@ let API_URL = 'https://localhost:12121/'
                             Laya['timer'].loop(50, y, x),
                                 y['duringPaipu'] = !1;
                         } else {
-                            (req = new XMLHttpRequest(),
-                                req.open("POST", API_URL),
-                                req.onload = function() {
+                            (GM_xmlhttpRequest({
+                                method: 'post',
+                                url: API_URL,
+                                data: JSON.stringify({
+                                    'shared_record_base_info': G.head
+                                }),
+                                onload: function(msg) {
                                     console.log('[' + new Date().format("yyyy-MM-dd hh:mm:ss") + '] 成功发送消息：\n' + JSON.stringify({
                                         'shared_record_base_info': G.head
                                     }));
-                                },
-                                req.send(JSON.stringify({
-                                    'shared_record_base_info': G.head
-                                }))
-                            );
+                                }
+                            }));
                             uiscript['UI_Loading'].Inst['setProgressVal'](0.1);
                             var R = G.head,
                                 s = [null, null, null, null],
@@ -10878,19 +10884,16 @@ let API_URL = 'https://localhost:12121/'
                         }
                     }), void 0);
             }
-
-
         }
-        // 从网上抄的时间格式化
         Date.prototype.format = function(fmt) {
             var o = {
-                "M+": this.getMonth() + 1, //月份 
-                "d+": this.getDate(), //日 
-                "h+": this.getHours(), //小时 
-                "m+": this.getMinutes(), //分 
-                "s+": this.getSeconds(), //秒 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                "S": this.getMilliseconds() //毫秒 
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S": this.getMilliseconds()
             };
             if (/(y+)/.test(fmt)) {
                 fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
