@@ -1,8 +1,23 @@
+**该项目已停止更新，无法使用！如有需要请使用[基于mitmproxy的中间人攻击方式](https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy)！！！**
+
+**该项目已停止更新，无法使用！如有需要请使用[基于mitmproxy的中间人攻击方式](https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy)！！！**
+
+**该项目已停止更新，无法使用！如有需要请使用[基于mitmproxy的中间人攻击方式](https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy)！！！**
+
+**该项目已停止更新，无法使用！如有需要请使用[基于mitmproxy的中间人攻击方式](https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy)！！！**
+
+**该项目已停止更新，无法使用！如有需要请使用[基于mitmproxy的中间人攻击方式](https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy)！！！**
+
+----
+
 # mahjong-helper-majsoul
 
 本油猴脚本用于将雀魂的牌局发到[日本麻将助手](https://github.com/EndlessCheng/mahjong-helper)，安装即用。  
 
-由于制作比较赶，可能还未兼容其他脚本，请期待后续的更新。  
+由于制作比较赶，可能还未兼容其他脚本，请期待后续的更新。
+
+
+
 
 Github: [mahjong-helper-majsoul](https://github.com/Avenshy/mahjong-helper-majsoul)
 
